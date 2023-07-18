@@ -10,7 +10,7 @@
       formControlName="description"
       class="input input-bordered w-full max-w-xs"
     />
-    <div class="alert alert-error" *ngIf="hasError()">
+    <div data-testid="error-alert" class="alert alert-error" *ngIf="hasError()">
       <p>A description is required and needs to be 100 characters or less.</p>
     </div>
   </div>
