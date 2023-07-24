@@ -1,3 +1,4 @@
+using Marten;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,14 @@ builder.Services.AddControllers() // Microsoft stuff for creating instances of c
 builder.Services.AddEndpointsApiExplorer(); // this is Microsoft stuff for making the endpoints visible to tools.
 builder.Services.AddSwaggerGen(); // the service that uses the one above to translate to OpenAPI
 
+var dataConnectionString = builder.Configuration.GetConnectionString("todos") ?? throw new Exception("Need a database connection string");
+Console.WriteLine($"Using the connection string {dataConnectionString}");
+builder.Services.AddMarten(options =>
+{
+    options.Connection(dataConnectionString);
+
+    options.AutoCreateSchemaObjects = Weasel.Core.AutoCreate.All; // good for development, it creates everything.
+});
 
 // everything above this line is configuring "Services" in our application.
 var app = builder.Build();

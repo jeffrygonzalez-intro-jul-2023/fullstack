@@ -1,22 +1,43 @@
 ﻿
 
+using Marten;
+
 namespace TodosApi.Controllers;
 
+[ApiController]
 public class TodoListController : ControllerBase
 {
+
+    private readonly IDocumentSession _documentSession;
+
+    public TodoListController(IDocumentSession documentSession)
+    {
+        _documentSession = documentSession;
+    }
+
+    [HttpPost("/todo-list")]
+    public async Task<ActionResult> AddTodoItem([FromBody] TodoListCreateModel request)
+    {
+
+        // if we get here, this is valid.
+        // add it to the database.
+        var newItem = new TodoListItemResponseModel(Guid.NewGuid(), request.Description, TodoItemStatus.Later);
+
+        _documentSession.Store(newItem);
+        await _documentSession.SaveChangesAsync();
+        // send it back to them. 
+        return Ok(newItem);
+    }
+
+
     // GET /todo-list
     [HttpGet("/todo-list")]
     public async Task<ActionResult> GetTodoList()
     {
         // fake this for a moment
-        var list = new List<TodoListItemResponseModel>
-        {
-            new TodoListItemResponseModel(Guid.NewGuid(), "Get Beer", TodoItemStatus.Now),
-            new TodoListItemResponseModel(Guid.NewGuid(), "Clean Garage", TodoItemStatus.Waiting)
-        };
+        var list = await _documentSession.Query<TodoListItemResponseModel>().ToListAsync();
 
-
-        var response = new CollectionResponse<TodoListItemResponseModel>(list);
-        return Ok(response);
+       // var response = new CollectionResponse<TodoListItemResponseModel>(list);
+        return Ok(list);
     }
 }
