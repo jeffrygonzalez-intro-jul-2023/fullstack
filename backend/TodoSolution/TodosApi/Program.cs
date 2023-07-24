@@ -1,5 +1,7 @@
 using Marten;
 using System.Text.Json.Serialization;
+using TodosApi;
+using TodosApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,9 @@ builder.Services.AddMarten(options =>
     options.AutoCreateSchemaObjects = Weasel.Core.AutoCreate.All; // good for development, it creates everything.
 });
 
+
+// This says "Hey MVC, if you create anything that needs an IManageTheTodoListCatalog, use the MartinTodoListCatalog
+builder.Services.AddTransient<IManageTheTodolistCatalog, MartenTodolistCatalog>();
 // everything above this line is configuring "Services" in our application.
 var app = builder.Build();
 // this is configuring the "middleware" - this is code that will see the incoming HTTP request

@@ -8,25 +8,18 @@ namespace TodosApi.Controllers;
 public class TodoListController : ControllerBase
 {
 
-    private readonly IDocumentSession _documentSession;
+    private readonly IManageTheTodolistCatalog _todoListCatalog;
 
-    public TodoListController(IDocumentSession documentSession)
+    public TodoListController(IManageTheTodolistCatalog todoListCatalog)
     {
-        _documentSession = documentSession;
+        _todoListCatalog = todoListCatalog;
     }
 
     [HttpPost("/todo-list")]
     public async Task<ActionResult> AddTodoItem([FromBody] TodoListCreateModel request)
     {
-
-        // if we get here, this is valid.
-        // add it to the database.
-        var newItem = new TodoListItemResponseModel(Guid.NewGuid(), request.Description, TodoItemStatus.Later);
-
-        _documentSession.Store(newItem);
-        await _documentSession.SaveChangesAsync();
-        // send it back to them. 
-        return Ok(newItem);
+        var response = await _todoListCatalog.AddTodoItemAsync(request);
+        return Ok(response);
     }
 
 
@@ -34,10 +27,7 @@ public class TodoListController : ControllerBase
     [HttpGet("/todo-list")]
     public async Task<ActionResult> GetTodoList()
     {
-        // fake this for a moment
-        var list = await _documentSession.Query<TodoListItemResponseModel>().ToListAsync();
-
-       // var response = new CollectionResponse<TodoListItemResponseModel>(list);
+        var list = await _todoListCatalog.GetFullListAsync();
         return Ok(list);
     }
 }
