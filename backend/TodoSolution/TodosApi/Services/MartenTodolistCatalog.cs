@@ -22,7 +22,9 @@ public class MartenTodolistCatalog : IManageTheTodolistCatalog
 
     public async Task<CollectionResponse<TodoListItemResponseModel>> GetFullListAsync()
     {
-        var response = await _session.Query<TodoListItemResponseModel>().ToListAsync();
+        var response = await _session.Query<TodoListItemResponseModel>()
+          
+            .ToListAsync();
         return new CollectionResponse<TodoListItemResponseModel>(response);
     }
 }
