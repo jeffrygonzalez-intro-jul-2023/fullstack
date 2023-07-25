@@ -12,7 +12,7 @@ public class TodoListController : ControllerBase
 
     public TodoListController(IManageTheTodolistCatalog todoListCatalog)
     {
-        _todoListCatalog = todoListCatalog;
+        this._todoListCatalog = todoListCatalog;
     }
 
     [HttpPost("/todo-list")]
