@@ -18,7 +18,7 @@ export const reducers: ActionReducerMap<CounterState> = {
 const selectFeature = createFeatureSelector<CounterState>(FEATURE_NAME);
 
 // 2. A selector per "branch" of the state.
-const selectCountBranch = createSelector(selectFeature, (f) => f.count);
+export const selectCountBranch = createSelector(selectFeature, (f) => f.count);
 
 // 3. (optional) you have "Helpers"
 
@@ -28,3 +28,5 @@ export const selectCounterCurrent = createSelector(
   selectCountBranch,
   (b) => b.current
 );
+
+export const selectCountingBy = createSelector(selectCountBranch, (b) => b.by);
