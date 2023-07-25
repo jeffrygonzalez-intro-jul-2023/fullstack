@@ -21,5 +21,6 @@ export const reducer = createReducer(
     current: s.current - s.by,
   })),
   on(CounterEvents.countReset, (s) => ({ ...s, current: 0 })),
-  on(CounterEvents.countBySet, (s, a) => ({ ...s, by: a.by }))
+  on(CounterEvents.countBySet, (s, a) => ({ ...s, by: a.by })),
+  on(CounterEvents.counterData, (s, a) => a.payload)
 );
