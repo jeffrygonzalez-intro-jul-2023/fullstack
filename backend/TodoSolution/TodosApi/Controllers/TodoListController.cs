@@ -45,6 +45,7 @@ public class TodoListController : ControllerBase
     [HttpGet("/todo-list")]
     public async Task<ActionResult> GetTodoList()
     {
+        await Task.Delay(3000);
         var list = await _todoListCatalog.GetFullListAsync();
         return Ok(list);
     }

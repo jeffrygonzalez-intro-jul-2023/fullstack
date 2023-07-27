@@ -18,13 +18,7 @@ export const routes: Routes = [
         (routes) => routes.todosRoutes
       ),
   },
-  {
-    path: 'counter',
-    loadChildren: () =>
-      import('./features/counter/counter.routes').then(
-        (routes) => routes.counterRoutes
-      ),
-  },
+
   {
     path: '**',
     redirectTo: 'dashboard',

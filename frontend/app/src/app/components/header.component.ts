@@ -16,6 +16,6 @@ import { selectCounterCurrent } from '../features/counter/state';
   `,
 })
 export class HeaderComponent {
-  //   current = inject(Store).selectSignal(selectCounterCurrent);
-  current = signal(3); // TODO: JEFF WILL FIX THIS LATER HE PROMISES
+  current = inject(Store).selectSignal(selectCounterCurrent);
+  // current = signal(3); // TODO: JEFF WILL FIX THIS LATER HE PROMISES
 }
