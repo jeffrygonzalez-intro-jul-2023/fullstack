@@ -9,7 +9,7 @@ public class StatusCyclerTests
 
     public StatusCyclerTests()
     {
-        _cycler = new StatusCyclerTwo();
+        _cycler = new StatusCycler();
     }
     [Fact]
     public void CanChangeTheStatusFromLaterToNow()

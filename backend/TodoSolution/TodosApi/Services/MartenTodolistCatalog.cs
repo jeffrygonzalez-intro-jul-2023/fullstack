@@ -35,7 +35,6 @@ public class MartenTodolistCatalog : IManageTheTodolistCatalog
         // change the status of the thing (etag)
         TodoListItemResponseModel updated  = _statusCycler.ProvideNextStatusFrom(savedItem);
         // save it in the database
-        // TODO: Show them This.
         _session.Store(updated);
         await _session.SaveChangesAsync();
         // return the saved thing back (not null) saying this worked ok.

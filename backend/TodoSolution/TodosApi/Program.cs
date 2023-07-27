@@ -29,7 +29,7 @@ builder.Services.AddMarten(options =>
 
 
 // This says "Hey MVC, if you create anything that needs an IManageTheTodoListCatalog, use the MartinTodoListCatalog
-// TODO: Show them this.
+
 builder.Services.AddTransient<IManageTheTodolistCatalog, MartenTodolistCatalog>();
 // everything above this line is configuring "Services" in our application.
 
