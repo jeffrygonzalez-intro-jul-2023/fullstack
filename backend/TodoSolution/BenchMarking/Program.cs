@@ -15,7 +15,6 @@ public class BenchMarkIt
     private readonly Guid _id = Guid.NewGuid();
     public BenchMarkIt()
     {
-        _provideStatusCycling = new StatusCyclerTwo();
     }
 
     [Benchmark]
