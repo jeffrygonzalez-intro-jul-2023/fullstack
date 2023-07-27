@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard.component';
 import { AboutComponent } from './pages/about.component';
+import { counterRoutes } from './features/counter/counter.routes';
 
-export const routes: Routes = [
+const appRoutes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -18,9 +19,17 @@ export const routes: Routes = [
         (routes) => routes.todosRoutes
       ),
   },
+];
 
+const redirectRoutes: Routes = [
   {
     path: '**',
     redirectTo: 'dashboard',
   },
+];
+
+export const routes: Routes = [
+  ...counterRoutes,
+  ...appRoutes,
+  ...redirectRoutes,
 ];
