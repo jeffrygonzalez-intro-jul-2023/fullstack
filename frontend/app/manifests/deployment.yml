@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: jeffrygonzalez/angular-app-jun-2023:v0.1
+        image: jeffrygonzalez/frontend-july-2023:v0.1
         resources:
           limits:
             memory: "128Mi"

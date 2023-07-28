@@ -21,3 +21,6 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 80
+        env:
+          - name: ConnectionStrings__todos
+            value: "Server=postgres-service;User Id=user;Password=password"
