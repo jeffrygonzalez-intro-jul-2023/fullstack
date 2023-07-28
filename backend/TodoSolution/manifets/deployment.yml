@@ -1,21 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: todos-api
   namespace: hypertheory
 spec:
-  replicas: 2
   selector:
     matchLabels:
-      app: frontend
+      app: todos-api
   template:
     metadata:
       labels:
-        app: frontend
+        app: todos-api
     spec:
       containers:
-      - name: frontend
-        image: jeffrygonzalez/angular-app-jun-2023:v0.1
+      - name: todos-api
+        image: jeffrygonzalez/todos-api-intro-july-2023:v0.1
         resources:
           limits:
             memory: "128Mi"
