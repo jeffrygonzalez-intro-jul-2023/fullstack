@@ -24,3 +24,5 @@ spec:
         env:
           - name: ConnectionStrings__todos
             value: "Server=postgres-service;User Id=user;Password=password"
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Development
